@@ -677,6 +677,12 @@
                         "scope": "application",
                         "description": "Determine whether to group all webview pages into the second editor column when solving problems."
                     },
+                    "leetcode.useVSCodeNode": {
+                        "type": "boolean",
+                        "default": true,
+                        "scope": "application",
+                        "description": "Whether to prefer using VS Code's internal Node.js if available."
+                    },
                     "leetcode.nodePath": {
                         "type": "string",
                         "default": "node",

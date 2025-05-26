@@ -5,6 +5,7 @@ import * as cp from "child_process";
 import * as fse from "fs-extra";
 import * as os from "os";
 import * as path from "path";
+import * as fs from 'fs';
 import * as requireFromString from "require-from-string";
 import { ExtensionContext } from "vscode";
 import { ConfigurationChangeEvent, Disposable, MessageItem, window, workspace, WorkspaceConfiguration } from "vscode";
@@ -219,6 +220,17 @@ class LeetCodeExecutor implements Disposable {
 
     private getNodePath(): string {
         const extensionConfig: WorkspaceConfiguration = workspace.getConfiguration("leetcode", null);
+        const useVSCodeNode = extensionConfig.get<boolean>("useVSCodeNode", true);
+        if (useVSCodeNode) {
+
+            const execDir = path.dirname(process.execPath);
+            const nodeBinary = process.platform === 'win32' ? 'node.exe' : 'node';
+            const vscodeNodePath = path.join(execDir, nodeBinary);
+
+            if (fs.existsSync(vscodeNodePath)) {
+                return vscodeNodePath;
+            }
+        }
         return extensionConfig.get<string>("nodePath", "node" /* default value */);
     }
 
