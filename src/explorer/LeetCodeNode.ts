@@ -15,6 +15,10 @@ export class LeetCodeNode {
         return this.data.name;
     }
 
+    public get translated(): string {
+        return this.data.translated;
+    }
+
     public get state(): ProblemState {
         return this.data.state;
     }

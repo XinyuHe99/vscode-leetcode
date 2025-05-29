@@ -3,6 +3,7 @@
 
 import * as _ from "lodash";
 import * as path from "path";
+import * as fse from 'fs-extra';
 import * as unescapeJS from "unescape-js";
 import * as vscode from "vscode";
 import { explorerNodeManager } from "../explorer/explorerNodeManager";
@@ -174,6 +175,30 @@ async function showProblemInternal(node: IProblem): Promise<void> {
         const fileName: string = leetCodeConfig
             .get<string>(`filePath.${language}.filename`, leetCodeConfig.get<string>(`filePath.default.filename`) || genFileName(node, language))
             .trim();
+        let prefix: string = (
+            leetCodeConfig.get<string>(`filePath.${language}.prefix`)
+            ?? leetCodeConfig.get<string>(`filePath.default.prefix`, "")
+        ).trim();
+        let suffix: string = (
+            leetCodeConfig.get<string>(`filePath.${language}.suffix`)
+            ?? leetCodeConfig.get<string>(`filePath.default.suffix`, "")
+        ).trim();
+
+        try {
+            const resolvedPrefixPath = path.resolve(prefix);
+            if (fse.pathExistsSync(resolvedPrefixPath) && fse.statSync(resolvedPrefixPath).isFile()) {
+                prefix = fse.readFileSync(resolvedPrefixPath, 'utf-8');
+            }
+        } catch (e) {
+        }
+
+        try {
+            const resolvedSuffixPath = path.resolve(suffix);
+            if (fse.pathExistsSync(resolvedSuffixPath) && fse.statSync(resolvedSuffixPath).isFile()) {
+                suffix = fse.readFileSync(resolvedSuffixPath, 'utf-8');
+            }
+        } catch (e) {
+        }
 
         let finalPath: string = path.join(workspaceFolder, fileFolder, fileName);
 
@@ -190,11 +215,11 @@ async function showProblemInternal(node: IProblem): Promise<void> {
         const descriptionConfig: IDescriptionConfiguration = settingUtils.getDescriptionConfiguration();
         const needTranslation: boolean = settingUtils.shouldUseEndpointTranslation();
 
-        await leetCodeExecutor.showProblem(node, language, finalPath, descriptionConfig.showInComment, needTranslation);
+        await leetCodeExecutor.showProblem(node, language, finalPath, descriptionConfig.showInComment, needTranslation, prefix, suffix);
         const promises: any[] = [
             vscode.window.showTextDocument(vscode.Uri.file(finalPath), {
                 preview: false,
-                viewColumn: vscode.ViewColumn.One,
+                viewColumn: vscode.ViewColumn.Two,
             }),
             promptHintMessage(
                 "hint.commentDescription",
@@ -260,6 +285,8 @@ async function resolveRelativePath(relativePath: string, node: IProblem, selecte
         switch (placeholder) {
             case "id":
                 return node.id;
+            case "paddedid":
+                return node.id.padStart(4, "0");
             case "name":
                 return node.name;
             case "camelcasename":
@@ -272,6 +299,12 @@ async function resolveRelativePath(relativePath: string, node: IProblem, selecte
             case "snakecasename":
             case "snake_case_name":
                 return _.snakeCase(node.name);
+            case "kebabcasetranslatedname":
+            case "kebab-case-translated-name":
+                return _.kebabCase(node.translated);
+            case "snakecasetranslatedname":
+            case "snake_case_translated_name":
+                return _.snakeCase(node.translated);
             case "ext":
                 return genFileExt(selectedLanguage);
             case "language":

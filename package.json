@@ -420,6 +420,14 @@
                                             "${id}-${kebab-case-name}.${ext}",
                                             "${id}_${snake_case_name}.${ext}"
                                         ]
+                                    },
+                                    "prefix": {
+                                        "type": "string",
+                                        "description": "Prefix content or a file path to prepend before the code. If a valid file path is provided, its contents will be used."
+                                    },
+                                    "suffix": {
+                                        "type": "string",
+                                        "description": "Suffix content or a file path to append after the code. If a valid file path is provided, its contents will be used."
                                     }
                                 },
                                 "required": [
@@ -435,6 +443,12 @@
                                     },
                                     "filename": {
                                         "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
+                                        "type": "string"
                                     }
                                 },
                                 "minProperties": 1
@@ -446,6 +460,12 @@
                                         "type": "string"
                                     },
                                     "filename": {
+                                        "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
                                         "type": "string"
                                     }
                                 },
@@ -459,6 +479,12 @@
                                     },
                                     "filename": {
                                         "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
+                                        "type": "string"
                                     }
                                 },
                                 "minProperties": 1
@@ -470,6 +496,12 @@
                                         "type": "string"
                                     },
                                     "filename": {
+                                        "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
                                         "type": "string"
                                     }
                                 },
@@ -483,6 +515,12 @@
                                     },
                                     "filename": {
                                         "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
+                                        "type": "string"
                                     }
                                 },
                                 "minProperties": 1
@@ -494,6 +532,12 @@
                                         "type": "string"
                                     },
                                     "filename": {
+                                        "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
                                         "type": "string"
                                     }
                                 },
@@ -507,6 +551,12 @@
                                     },
                                     "filename": {
                                         "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
+                                        "type": "string"
                                     }
                                 },
                                 "minProperties": 1
@@ -518,6 +568,12 @@
                                         "type": "string"
                                     },
                                     "filename": {
+                                        "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
                                         "type": "string"
                                     }
                                 },
@@ -531,6 +587,12 @@
                                     },
                                     "filename": {
                                         "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
+                                        "type": "string"
                                     }
                                 },
                                 "minProperties": 1
@@ -542,6 +604,12 @@
                                         "type": "string"
                                     },
                                     "filename": {
+                                        "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
                                         "type": "string"
                                     }
                                 },
@@ -555,6 +623,12 @@
                                     },
                                     "filename": {
                                         "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
+                                        "type": "string"
                                     }
                                 },
                                 "minProperties": 1
@@ -566,6 +640,12 @@
                                         "type": "string"
                                     },
                                     "filename": {
+                                        "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
                                         "type": "string"
                                     }
                                 },
@@ -579,6 +659,12 @@
                                     },
                                     "filename": {
                                         "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
+                                        "type": "string"
                                     }
                                 },
                                 "minProperties": 1
@@ -590,6 +676,12 @@
                                         "type": "string"
                                     },
                                     "filename": {
+                                        "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
                                         "type": "string"
                                     }
                                 },
@@ -603,6 +695,12 @@
                                     },
                                     "filename": {
                                         "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
+                                        "type": "string"
                                     }
                                 },
                                 "minProperties": 1
@@ -614,6 +712,12 @@
                                         "type": "string"
                                     },
                                     "filename": {
+                                        "type": "string"
+                                    },
+                                    "prefix": {
+                                        "type": "string"
+                                    },
+                                    "suffix": {
                                         "type": "string"
                                     }
                                 },
@@ -628,6 +732,12 @@
                                 },
                                 "filename": {
                                     "type": "string"
+                                },
+                                "prefix": {
+                                    "type": "string"
+                                },
+                                "suffix": {
+                                    "type": "string"
                                 }
                             },
                             "minProperties": 1
@@ -635,7 +745,9 @@
                         "default": {
                             "default": {
                                 "folder": "",
-                                "filename": "${id}.${kebab-case-name}.${ext}"
+                                "filename": "${id}.${kebab-case-name}.${ext}",
+                                "prefix": "",
+                                "suffix": ""
                             }
                         }
                     },

@@ -101,7 +101,7 @@ class LeetCodeExecutor implements Disposable {
         return await this.executeCommandEx(this.nodeExecutable, cmd);
     }
 
-    public async showProblem(problemNode: IProblem, language: string, filePath: string, showDescriptionInComment: boolean = false, needTranslation: boolean): Promise<void> {
+    public async showProblem(problemNode: IProblem, language: string, filePath: string, showDescriptionInComment: boolean = false, needTranslation: boolean, prefix: string = "", suffix: string = ""): Promise<void> {
         const templateType: string = showDescriptionInComment ? "-cx" : "-c";
         const cmd: string[] = [await this.getLeetCodeBinaryPath(), "show", problemNode.id, templateType, "-l", language];
 
@@ -112,7 +112,22 @@ class LeetCodeExecutor implements Disposable {
         if (!await fse.pathExists(filePath)) {
             await fse.createFile(filePath);
             const codeTemplate: string = await this.executeCommandWithProgressEx("Fetching problem data...", this.nodeExecutable, cmd);
-            await fse.writeFile(filePath, codeTemplate);
+
+            const lines = codeTemplate.split("\n");
+            const modifiedLines: string[] = [];
+
+            for (const line of lines) {
+                if (line.includes("@lc code=start") && prefix !== "") {
+                    modifiedLines.push(prefix);
+                }
+                modifiedLines.push(line);
+                if (line.includes("@lc code=end") && suffix !== "") {
+                    modifiedLines.push(suffix);
+                }
+            }
+
+            const codeModified = modifiedLines.join("\n");
+            await fse.writeFile(filePath, codeModified);
         }
     }
 
